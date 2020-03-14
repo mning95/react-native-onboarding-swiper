@@ -59,7 +59,7 @@ class Onboarding extends Component {
   };
 
   goNext = () => {
-    this.flatList.scrollToIndex({
+    this.flatList.getNode().scrollToIndex({
       animated: true,
       index: this.state.currentPage + 1,
     });
@@ -162,7 +162,7 @@ class Onboarding extends Component {
     const skipFun =
       skipToPage != null
         ? () => {
-            this.flatList.scrollToIndex({
+            this.flatList.getNode().scrollToIndex({
               animated: true,
               index: skipToPage,
             });
