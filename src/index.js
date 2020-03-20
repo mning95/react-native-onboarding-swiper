@@ -1,4 +1,5 @@
 import {
+  Animated,
   Dimensions,
   FlatList,
   StatusBar,
@@ -6,7 +7,6 @@ import {
   ViewPropTypes,
   Text,
 } from 'react-native';
-import Animated, { timing } from 'react-native-reanimated';
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -22,7 +22,6 @@ import DoneButton from './buttons/DoneButton';
 // hotfix: https://github.com/facebook/react-native/issues/16710
 const itemVisibleHotfix = { itemVisiblePercentThreshold: 100 };
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
-const { Value } = Animated;
 
 class Onboarding extends Component {
   constructor() {
@@ -33,12 +32,12 @@ class Onboarding extends Component {
       previousPage: null,
       width: null,
       height: null,
-      backgroundColorAnim: new Value(0),
+      backgroundColorAnim: new Animated.Value(0),
     };
   }
 
   componentDidUpdate() {
-    timing(this.state.backgroundColorAnim, {
+    Animated.timing(this.state.backgroundColorAnim, {
       toValue: 1,
       duration: this.props.transitionAnimationDuration,
     }).start();
@@ -54,7 +53,7 @@ class Onboarding extends Component {
       return {
         previousPage: state.currentPage,
         currentPage: viewableItems[0].index,
-        backgroundColorAnim: new Value(0),
+        backgroundColorAnim: new Animated.Value(0),
       };
     });
   };
